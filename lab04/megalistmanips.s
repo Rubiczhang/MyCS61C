@@ -65,21 +65,39 @@ map:
     # also keep in mind that we should not make ANY assumption on which registers
     # are modified by the callees, even when we know the content inside the functions 
     # we call. this is to enforce the abstraction barrier of calling convention.
+
 mapLoop:
-    add t1, s0, x0      # load the address of the array of current node into t1
+#bug 5: confuse the difference between address and value of pointer
+    #add t1, s0, x0      # load the address of the array of current node into t1
+    lw t1, 0(s0)
     lw t2, 4(s0)        # load the size of the node's array into t2
+#bug 2: should not lw 0(t1)
+    slli t3, t0, 2
+    add t3, t1, t3      # offset the array address by the count
+    lw a0, 0(t3)        # load the value at that address into a0
 
-    add t1, t1, t0      # offset the array address by the count
-    lw a0, 0(t1)        # load the value at that address into a0
-
+#bug 3: no reservation of registers before function call
+    addi sp, sp, -12
+    sw t0, 0(sp)
+    sw t1, 4(sp)
+    sw t2, 8(sp)
     jalr s1             # call the function on that value.
+    lw t0, 0(sp)
+    lw t2, 8(sp)
+    lw t1, 4(sp)
+    addi sp, sp, 12
+#bug 4: should not sw to 0(t1)
+    #add t3, t3, t1
+    #sw a0, 0(t1)        # store the returned value back into the array
+    sw a0, 0(t3)
 
-    sw a0, 0(t1)        # store the returned value back into the array
     addi t0, t0, 1      # increment the count
     bne t0, t2, mapLoop # repeat if we haven't reached the array size yet
-
-    la a0, 8(s0)        # load the address of the next node into a0
-    lw a1, 0(s1)        # put the address of the function back into a1 to prepare for the recursion
+#bug 1: wrong usage of lw & la
+#    la a0, 8(s0)        # load the address of the next node into a0
+    lw a0, 8(s0)    
+#    lw a1, 0(s1)        # put the address of the function back into a1 to prepare for the recursion
+    add a1, s1, zero    
 
     jal  map            # recurse
 done:
