@@ -1,0 +1,17 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+A_count	ex1.h	/^    int A_count;$/;"	m	struct:DNA_sequence
+C_count	ex1.h	/^    int C_count;$/;"	m	struct:DNA_sequence
+DNA_sequence	ex1.h	/^typedef struct DNA_sequence {$/;"	s
+DNA_sequence	ex1.h	/^} DNA_sequence;$/;"	t	typeref:struct:DNA_sequence
+EX_1_H	ex1.h	2;"	d
+G_count	ex1.h	/^    int G_count;$/;"	m	struct:DNA_sequence
+T_count	ex1.h	/^    int T_count;$/;"	m	struct:DNA_sequence
+compute_nucleotide_occurrences	ex1.c	/^void compute_nucleotide_occurrences(DNA_sequence *dna_seq) {$/;"	f
+main	test_ex1.c	/^int main(int argc, char **argv) {$/;"	f
+num_occurrences	ex1.c	/^int num_occurrences(char *str, char letter) {$/;"	f
+sequence	ex1.h	/^    char sequence [21];$/;"	m	struct:DNA_sequence
