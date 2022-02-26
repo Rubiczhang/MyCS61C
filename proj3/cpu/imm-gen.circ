@@ -270,12 +270,12 @@
     </comp>
     <comp lib="0" loc="(240,920)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="immU3"/>
+      <a name="label" val="immJ4"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(240,950)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="immJ4"/>
+      <a name="label" val="immU3"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(250,580)" name="Tunnel">
